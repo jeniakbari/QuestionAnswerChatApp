@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+   
+
+    /* Language and Environment */
+                                  
+    
+    /* Modules */
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "target": "es6",                                     /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "outDir": "dist",
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+  
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+
+    /* Type Checking */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+    // "moduleResolution": "node",
+    // "allowSyntheticDefaultImports": true,
+  },
+  "include": ["src/**/*.ts", "src/types/**/*.d.ts"],
+}
