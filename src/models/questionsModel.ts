@@ -25,6 +25,8 @@ class Question extends Model<QuestionAttributes, QuestionCreationAttrinbutes> im
         Question.belongsTo(models.User, {foreignKey: "user_id" });
         Question.hasMany(models.Answer,{foreignKey:"question_id"});
         Question.hasMany(models.ExpertQuestionMap, { foreignKey: "question_id" });
+        Question.hasMany(models.Chat, { foreignKey: "question_id"});
+
     }
 }
 

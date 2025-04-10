@@ -47,6 +47,8 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
         User.hasMany(models.Like, { foreignKey: "user_id"});
         User.hasMany(models.CoinsTransaction, { foreignKey: "user_id"});
         User.hasMany(models.ExpertQuestionMap, { foreignKey: "question_id" });
+        User.hasMany(models.Chat, { foreignKey: "sender_id",as: "sentMessages"});
+        User.hasMany(models.Chat, { foreignKey: "receiver_id",as: "receivedMessages"});
     }
 
 }

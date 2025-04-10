@@ -9,6 +9,7 @@ import { Like } from "./src/models/likesModel";
 import { UserLoginLogs } from "./src/models/userLoginLogsModel";
 import { CoinsTransaction } from "./src/models/coinsTransactionModel";
 import {ExpertQuestionMap} from "./src/models/expertQuestionMapModel";
+import {Chat} from './src/models/chatModel';
 import { AuthRoute } from "./src/routes/authRoute";
 import { Router } from "express";
 import router from './src/routes/indexRoutes';
@@ -27,14 +28,15 @@ async function startServer(){
   try {
       await sequelize.authenticate();
       console.log("Database Connected Successfully");
-      User.associate({Question,Answer,Comment,Like,UserLoginLogs,CoinsTransaction,ExpertQuestionMap });
+      User.associate({Question,Answer,Comment,Like,UserLoginLogs,CoinsTransaction,ExpertQuestionMap,Chat });
       UserLoginLogs.associate({User});
-      Question.associate({User,Answer,ExpertQuestionMap});
+      Question.associate({User,Answer,ExpertQuestionMap,Chat});
       Like.associate({User,Answer});
       Comment.associate({User,Answer});
       CoinsTransaction.associate({User});
       Answer.associate({User,Question,Comment});
       ExpertQuestionMap.associate({User,Question});
+      Chat.associate({User,Question})
       await sequelize.sync({alter:true});
       app.listen(process.env.PORT,()=>{
         console.log(`Server Running on PORT ${process.env.PORT}`);
