@@ -13,12 +13,26 @@ import {Chat} from './src/models/chatModel';
 import { AuthRoute } from "./src/routes/authRoute";
 import { Router } from "express";
 import router from './src/routes/indexRoutes';
+import http from "http";
+import { Server } from "socket.io";
+import { initChatSocket } from "./src/socket/socketServer";
+
 
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  }
+});
+
+initChatSocket(io);
 
 // new AuthRoute(router);
 app.use("/api", router);
@@ -38,7 +52,7 @@ async function startServer(){
       ExpertQuestionMap.associate({User,Question});
       Chat.associate({User,Question})
       await sequelize.sync({alter:true});
-      app.listen(process.env.PORT,()=>{
+      httpServer.listen(process.env.PORT,()=>{
         console.log(`Server Running on PORT ${process.env.PORT}`);
         
       })

@@ -7,6 +7,7 @@ import { CommentRoute } from "./commentRoute";
 import { authenticateToken } from "../middleware/authtokenMiddleware";
 import { LikeRoute } from "./likeRoute";
 import { CoinRoute } from "./coinRoute";
+import {ChatRoute} from "./chatRoute";
 const router = Router();
 
 // Initialize routes
@@ -30,5 +31,8 @@ router.use("/like",authenticateToken,likeRoutes.router);
 
 const coinRoutes = new CoinRoute();
 router.use("/coin",authenticateToken,coinRoutes.router);
+
+const chatRoutes = new ChatRoute();
+router.use("/chat",authenticateToken,chatRoutes.router);
 
 export default router;
